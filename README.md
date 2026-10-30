@@ -1,6 +1,16 @@
 # Crud Praktek
 
-Praktik CRUD PHP.
+Praktik CRUD PHP (LAMP/XAMPP) yang dibuat.
+
+## Struktur
+
+```
+crud_praktek/
+├── crud_siswa/
+├── crud_barang/
+├── crud_nilai/
+└── README.md
+```
 
 ![crud_siswa](assets/crud_siswa.png)
 
@@ -24,16 +34,143 @@ Praktik CRUD PHP.
 - Fitur tambahan: kolom Rata-rata = (Nilai Pemrograman + Nilai Web)/2, Keterangan (Lulus jika ≥75, Belum Lulus jika <75)
 - File: koneksi.php, index.php, tambah.php, edit.php, hapus.php, db_nilai.sql
 
-## Cara uji di LAMP
+---
 
-1. Import SQL: `mysql -uroot < db_*.sql`
-2. Taruh folder di `/var/www/html/` milik apache2
-3. Akses `http://localhost/crud_siswa/`, `/crud_barang/`, `/crud_nilai/`
-4. Uji tambah, edit, hapus, dan cek perhitungan rata-rata/keterangan (nilai).
+## Uji di LAMP (Linux + Apache + MariaDB/MySQL + PHP)
 
-## Cara uji di XAMPP
+### 1. Prasyarat
 
-1. Import SQL di phpmyadmin
-2. Taruh folder di `htdocs` milik apache2
-3. Akses `crud siswa, crud barang, crud nilai`
-4. Uji CRUD.
+```bash
+sudo apt update
+sudo apt install apache2 mariadb-server php php-mysqli -y
+sudo systemctl start apache2 mariadb
+```
+
+### 2. Salin project ke web root
+
+```bash
+sudo cp -r /home/moon/ian/crud_siswa /home/moon/ian/crud_barang /home/moon/ian/crud_nilai /var/www/html/
+sudo chown -R www-data:www-data /var/www/html/crud_*
+```
+
+### 3. Import database
+
+```bash
+sudo mysql < /var/www/html/crud_siswa/db_sekolah.sql
+sudo mysql < /var/www/html/crud_barang/db_toko.sql
+sudo mysql < /var/www/html/crud_nilai/db_nilai.sql
+```
+
+Atau manual via MariaDB:
+
+```bash
+sudo mysql
+```
+
+```sql
+SOURCE /var/www/html/crud_siswa/db_sekolah.sql;
+SOURCE /var/www/html/crud_barang/db_toko.sql;
+SOURCE /var/www/html/crud_nilai/db_nilai.sql;
+```
+
+### 4. Akses di browser
+
+- http://localhost/crud_siswa/
+- http://localhost/crud_barang/
+- http://localhost/crud_nilai/
+
+### 5. Uji fungsi
+
+1. Tambah data baru
+2. Edit data
+3. Hapus data
+4. Cek perhitungan rata-rata & keterangan (crud_nilai)
+
+### 6. Hapus (cleanup) di LAMP
+
+Hapus database:
+
+```bash
+sudo mysql
+```
+
+```sql
+DROP DATABASE db_sekolah;
+DROP DATABASE db_toko;
+DROP DATABASE db_nilai;
+```
+
+Hapus file project:
+
+```bash
+sudo rm -rf /var/www/html/crud_siswa /var/www/html/crud_barang /var/www/html/crud_nilai
+```
+
+---
+
+## Uji di XAMPP (Windows)
+
+### 1. Prasyarat
+
+- Install XAMPP dari https://www.apachefriends.org
+- Jalankan Apache & MySQL di XAMPP Control Panel
+
+### 2. Salin project
+
+Copy folder `crud_siswa`, `crud_barang`, `crud_nilai` ke:
+
+```
+C:\xampp\htdocs\
+```
+
+### 3. Import database
+
+1. Buka http://localhost/phpmyadmin
+2. Klik "Import"
+3. Pilih file `db_sekolah.sql`, `db_toko.sql`, `db_nilai.sql` (satu per satu)
+4. Klik "Go"
+
+Atau via SQL tab:
+
+```sql
+SOURCE C:/xampp/htdocs/crud_siswa/db_sekolah.sql;
+SOURCE C:/xampp/htdocs/crud_barang/db_toko.sql;
+SOURCE C:/xampp/htdocs/crud_nilai/db_nilai.sql;
+```
+
+### 4. Akses di browser
+
+- http://localhost/crud_siswa/
+- http://localhost/crud_barang/
+- http://localhost/crud_nilai/
+
+### 5. Uji fungsi
+
+1. Tambah data baru
+2. Edit data
+3. Hapus data
+4. Cek perhitungan rata-rata & keterangan (crud_nilai)
+
+### 6. Hapus (cleanup) di XAMPP
+
+Hapus database di phpMyAdmin:
+
+1. Buka http://localhost/phpmyadmin
+2. Pilih `db_sekolah`, `db_toko`, `db_nilai`
+3. Tab "Operations" → "Drop the database (DROP)" → OK
+
+Atau via SQL:
+
+```sql
+DROP DATABASE db_sekolah;
+DROP DATABASE db_toko;
+DROP DATABASE db_nilai;
+```
+
+Hapus file project:
+
+```
+C:\xampp\htdocs\crud_siswa
+C:\xampp\htdocs\crud_barang
+C:\xampp\htdocs\crud_nilai
+```
