@@ -1,15 +1,198 @@
-<?php include "koneksi.php";
-function aman($t){return htmlspecialchars((string)$t,ENT_QUOTES,'UTF-8');}
-$q=$koneksi->query("SELECT * FROM barang ORDER BY id DESC");
+<?php
+/**
+ * File        : index.php
+ * Deskripsi   : Menampilkan seluruh data barang dalam bentuk tabel
+ * Fungsi      : Read (Menampilkan Data)
+ */
+
+include "koneksi.php";
+
+/**
+ * Fungsi untuk mencegah XSS (Cross Site Scripting)
+ * @param string $teks
+ * @return string
+ */
+function aman($teks)
+{
+    return htmlspecialchars((string)$teks, ENT_QUOTES, 'UTF-8');
+}
+
+// Mengambil seluruh data barang diurutkan berdasarkan ID terbaru
+$query = "SELECT * FROM barang ORDER BY id DESC";
+$data  = $koneksi->query($query);
 ?>
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Data Barang</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#f1f5f9;margin:30px}h2{color:#0f766e}table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.05)}.btn{display:inline-block;background:#0f766e;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;margin:15px 0}th,td{padding:12px 16px;border:1px solid #e5e7eb;text-align:left}thead tr{background:#0f766e;color:#fff}tbody tr:nth-child(even){background:#f8fafc}.aksi a{margin:0 4px;text-decoration:none;font-weight:bold}.edit{color:#2563eb}.hapus{color:#dc2626}.kosong{text-align:center;padding:20px;color:#6b7280}</style></head><body>
-<h2>Data Barang Toko Komputer</h2>
-<a class="btn" href="tambah.php">+ Tambah Barang</a>
-<table><thead><tr><th>No</th><th>Kode</th><th>Nama Barang</th><th>Harga</th><th>Stok</th><th>Aksi</th></tr></thead><tbody>
-<?php $no=1;if($q->num_rows>0){while($b=$q->fetch_assoc()){?>
-<tr><td><?=$no++?></td><td><?=aman($b['kode_barang'])?></td><td><?=aman($b['nama_barang'])?></td><td>Rp <?=number_format($b['harga'],0,',','.')?></td><td><?=aman($b['stok'])?></td>
-<td class="aksi"><a class="edit" href="edit.php?id=<?=(int)$b['id']?>">Edit</a> | <a class="hapus" href="hapus.php?id=<?=(int)$b['id']?>" onclick="return confirm('Yakin hapus?')">Hapus</a></td></tr>
-<?php } } else { ?><tr><td colspan="6" class="kosong">Belum ada data.</td></tr><?php } ?>
-</tbody></table></body></html>
-<?php $koneksi->close();?>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Barang | CRUD PHP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            margin: 30px;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        header h2 {
+            color: #0f766e;
+            text-transform: uppercase;
+        }
+
+        .btn-tambah {
+            display: inline-block;
+            background-color: #0f766e;
+            color: #ffffff;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 15px 0;
+            transition: 0.3s ease;
+        }
+
+        .btn-tambah:hover {
+            background-color: #115e59;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead tr {
+            background-color: #0f766e;
+            color: #ffffff;
+        }
+
+        table th,
+        table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .aksi {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .btn-edit {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-edit:hover {
+            text-decoration: underline;
+        }
+
+        .btn-hapus {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-hapus:hover {
+            text-decoration: underline;
+        }
+
+        .garis {
+            color: #9ca3af;
+        }
+
+        .kosong {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Data Barang Toko Komputer</h2>
+    </header>
+
+    <a class="btn-tambah" href="tambah.php">+ Tambah Barang</a>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kode</th>
+                    <th>Nama Barang</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $no = 1;
+                if ($data->num_rows > 0) {
+                    while ($barang = $data->fetch_assoc()) {
+                ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= aman($barang['kode_barang']); ?></td>
+                            <td><?= aman($barang['nama_barang']); ?></td>
+                            <td>Rp <?= number_format($barang['harga'], 0, ',', '.'); ?></td>
+                            <td><?= aman($barang['stok']); ?></td>
+                            <td>
+                                <div class="aksi">
+                                    <a class="btn-edit" href="edit.php?id=<?= (int)$barang['id']; ?>">Edit</a>
+                                    <span class="garis">|</span>
+                                    <a class="btn-hapus" href="hapus.php?id=<?= (int)$barang['id']; ?>" onclick="return confirm('Yakin ingin menghapus data <?= aman(addslashes($barang['nama_barang'])); ?>?')">Hapus</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <tr>
+                        <td colspan="6" class="kosong">Belum ada data barang yang tersimpan.</td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+<?php
+// Menutup koneksi database
+$koneksi->close();
+?>
