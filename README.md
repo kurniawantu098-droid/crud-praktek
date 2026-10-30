@@ -1,6 +1,6 @@
-# Crud Praktek
+# CRUD Praktek — Praktik CRUD PHP (LAMP/XAMPP)
 
-Praktik CRUD PHP (LAMP/XAMPP) yang dibuat.
+Praktik CRUD PHP (LAMP/XAMPP) yang dibuat untuk belajar operasi Create, Read, Update, Delete pada database MySQL/MariaDB.
 
 ## Struktur
 
@@ -51,6 +51,7 @@ sudo systemctl start apache2 mariadb
 ```bash
 sudo cp -r /home/moon/ian/crud_siswa /home/moon/ian/crud_barang /home/moon/ian/crud_nilai /var/www/html/
 sudo chown -R www-data:www-data /var/www/html/crud_*
+sudo chmod -R 755 /var/www/html/crud_*
 ```
 
 ### 3. Import database
@@ -174,3 +175,45 @@ C:\xampp\htdocs\crud_siswa
 C:\xampp\htdocs\crud_barang
 C:\xampp\htdocs\crud_nilai
 ```
+
+---
+
+# Referensi
+
+## CRUD
+CRUD = **C**reate (tambah), **R**ead (baca/tampil), **U**pdate (ubah), **D**elete (hapus). Pola dasar pengelolaan data pada aplikasi database.
+
+## LAMP
+Stack gabungan untuk server Linux:
+- **L**inux — sistem operasi
+- **A**pache — web server
+- **M**ySQL/MariaDB — database
+- **P**HP — bahasa pemrograman server-side
+
+## XAMPP
+Paket aplikasi (cross-platform) yang menyediakan:
+- **X** = cross-platform (Windows/Linux/macOS)
+- **A**pache — web server
+- **M**ariaDB/MySQL — database
+- **P**HP — bahasa pemrograman
+- **P**erl — bahasa pemrograman (opsional)
+
+## Komponen inti
+- **Linux/Windows** — sistem operasi host
+- **Apache2** — web server (menjalankan PHP)
+- **MySQL/MariaDB** — penyimpanan data (database)
+- **PHP** — bahasa server-side untuk CRUD
+- **phpMyAdmin** — antarmuka web untuk kelola database MySQL/MariaDB
+
+## Hashtag
+#crud #php #mysql #mariadb #apache #lamp #xampp #phpmyadmin #webdev
+
+## Sumber
+- CRUD: https://en.wikipedia.org/wiki/Create,_read,_update_and_delete
+- LAMP: https://en.wikipedia.org/wiki/LAMP_(software_bundle)
+- XAMPP: https://www.apachefriends.org
+- Apache: https://httpd.apache.org
+- MariaDB: https://mariadb.org
+- MySQL: https://www.mysql.com
+- PHP: https://www.php.net
+- phpMyAdmin: https://www.phpmyadmin.net
