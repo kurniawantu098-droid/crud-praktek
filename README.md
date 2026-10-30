@@ -181,39 +181,26 @@ C:\xampp\htdocs\crud_nilai
 # Referensi
 
 ## CRUD
-CRUD = **C**reate (tambah), **R**ead (baca/tampil), **U**pdate (ubah), **D**elete (hapus). Pola dasar pengelolaan data pada aplikasi database.
+CRUD = **C**reate (tambah), **R**ead (baca/tampil), **U**pdate (ubah), **D**elete (hapus). Pola dasar pengelolaan data pada aplikasi database. [Wikipedia](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
 
 ## LAMP
-Stack gabungan untuk server Linux:
+Stack gabungan untuk server Linux: [Wikipedia](https://en.wikipedia.org/wiki/LAMP_(software_bundle))
 - **L**inux — sistem operasi
-- **A**pache — web server
-- **M**ySQL/MariaDB — database
-- **P**HP — bahasa pemrograman server-side
+- **A**pache — web server [Apache](https://httpd.apache.org)
+- **M**ySQL/MariaDB — database [MySQL](https://www.mysql.com) / [MariaDB](https://mariadb.org)
+- **P**HP — bahasa pemrograman server-side [PHP](https://www.php.net)
 
 ## XAMPP
-Paket aplikasi (cross-platform) yang menyediakan:
+Paket aplikasi (cross-platform) yang menyediakan: [XAMPP](https://www.apachefriends.org)
 - **X** = cross-platform (Windows/Linux/macOS)
-- **A**pache — web server
-- **M**ariaDB/MySQL — database
-- **P**HP — bahasa pemrograman
+- **A**pache — web server [Apache](https://httpd.apache.org)
+- **M**ariaDB/MySQL — database [MariaDB](https://mariadb.org) / [MySQL](https://www.mysql.com)
+- **P**HP — bahasa pemrograman [PHP](https://www.php.net)
 - **P**erl — bahasa pemrograman (opsional)
 
 ## Komponen inti
-- **Linux/Windows** — sistem operasi host
-- **Apache2** — web server (menjalankan PHP)
-- **MySQL/MariaDB** — penyimpanan data (database)
-- **PHP** — bahasa server-side untuk CRUD
-- **phpMyAdmin** — antarmuka web untuk kelola database MySQL/MariaDB
-
-## Hashtag
-#crud #php #mysql #mariadb #apache #lamp #xampp #phpmyadmin #webdev
-
-## Sumber
-- CRUD: https://en.wikipedia.org/wiki/Create,_read,_update_and_delete
-- LAMP: https://en.wikipedia.org/wiki/LAMP_(software_bundle)
-- XAMPP: https://www.apachefriends.org
-- Apache: https://httpd.apache.org
-- MariaDB: https://mariadb.org
-- MySQL: https://www.mysql.com
-- PHP: https://www.php.net
-- phpMyAdmin: https://www.phpmyadmin.net
+- **Linux/Windows** — sistem operasi host [Linux](https://www.linux.org) / [Windows](https://www.microsoft.com/windows)
+- **Apache2** — web server (menjalankan PHP) [Apache](https://httpd.apache.org)
+- **MySQL/MariaDB** — penyimpanan data (database) [MySQL](https://www.mysql.com) / [MariaDB](https://mariadb.org)
+- **PHP** — bahasa server-side untuk CRUD [PHP](https://www.php.net)
+- **phpMyAdmin** — antarmuka web untuk kelola database MySQL/MariaDB [phpMyAdmin](https://www.phpmyadmin.net)
